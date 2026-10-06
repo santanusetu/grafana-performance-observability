@@ -19,7 +19,7 @@
     "hidden": true
   },
   "schemaVersion": 39,
-  "version": 30,
+  "version": 31,
   "panels": [
     {
       "type": "stat",
@@ -776,7 +776,7 @@
         "x": 0,
         "y": 26,
         "w": 14,
-        "h": 12
+        "h": 14
       },
       "targets": [
         {
@@ -846,7 +846,7 @@
         "x": 14,
         "y": 26,
         "w": 10,
-        "h": 12
+        "h": 14
       },
       "options": {
         "mode": "markdown",
@@ -860,7 +860,7 @@
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 38,
+        "y": 40,
         "w": 24,
         "h": 1
       },
@@ -877,7 +877,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 39,
+        "y": 41,
         "w": 14,
         "h": 12
       },
@@ -962,7 +962,7 @@
       "title": "Analysis: change between seasons",
       "gridPos": {
         "x": 14,
-        "y": 39,
+        "y": 41,
         "w": 10,
         "h": 12
       },
@@ -978,7 +978,7 @@
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 51,
+        "y": 53,
         "w": 24,
         "h": 1
       },
@@ -990,7 +990,7 @@
       "title": "Possible checkpoints for future games",
       "gridPos": {
         "x": 0,
-        "y": 52,
+        "y": 54,
         "w": 24,
         "h": 8
       },
@@ -1005,7 +1005,7 @@
       "title": "Insights",
       "gridPos": {
         "x": 0,
-        "y": 60,
+        "y": 62,
         "w": 24,
         "h": 5
       },
@@ -1021,7 +1021,7 @@
       "collapsed": true,
       "gridPos": {
         "x": 0,
-        "y": 65,
+        "y": 67,
         "w": 24,
         "h": 1
       },
@@ -1035,7 +1035,7 @@
           },
           "gridPos": {
             "x": 0,
-            "y": 75,
+            "y": 77,
             "w": 12,
             "h": 12
           },
@@ -1114,7 +1114,7 @@
           },
           "gridPos": {
             "x": 12,
-            "y": 66,
+            "y": 68,
             "w": 12,
             "h": 10
           },
@@ -1193,7 +1193,7 @@
       "collapsed": true,
       "gridPos": {
         "x": 0,
-        "y": 66,
+        "y": 68,
         "w": 24,
         "h": 1
       },
@@ -1208,7 +1208,7 @@
           },
           "gridPos": {
             "x": 0,
-            "y": 67,
+            "y": 69,
             "w": 24,
             "h": 11
           },
@@ -1303,7 +1303,7 @@
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 67,
+        "y": 69,
         "w": 24,
         "h": 1
       },
@@ -1320,9 +1320,9 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 68,
+        "y": 70,
         "w": 24,
-        "h": 17
+        "h": 19
       },
       "targets": [
         {
@@ -1443,7 +1443,7 @@
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 85,
+        "y": 89,
         "w": 24,
         "h": 1
       },
@@ -1460,7 +1460,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 86,
+        "y": 90,
         "w": 24,
         "h": 18
       },

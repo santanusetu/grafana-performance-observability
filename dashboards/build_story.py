@@ -258,13 +258,13 @@ FROM cricket.team_ranks
 WHERE team = '{TEAM}' AND season = '{SEASON}' AND metric NOT IN ('Net run rate', 'Average score')
 ORDER BY 2 DESC"""
     P += [
-        bars("Summer 2026: how we compare with the division average", bw_sql, 0, y, 14, 12, "Metric",
+        bars("Summer 2026: how we compare with the division average", bw_sql, 0, y, 14, 14, "Metric",
              "Percentage difference from the Div A average for each measure, flipped so that positive always "
              "means better for us (e.g. fewer dot balls faced counts as positive).",
              horizontal=True, by_sign=True, unit="percent"),
-        text("Analysis: performance relative to the division", BETTER_WORSE_MD, 14, y, 10, 12),
+        text("Analysis: performance relative to the division", BETTER_WORSE_MD, 14, y, 10, 14),
     ]
-    y += 12
+    y += 14
 
     # 4. League shift and our adaptation
     P.append(section("4 · The league changed between Spring and Summer. Did we?", y)); y += 1
@@ -328,6 +328,10 @@ FROM r ORDER BY o"""
             p["gridPos"]["x"] = x if len(inner) > 1 else 0
             p["gridPos"]["w"] = 12 if len(inner) > 1 else 24
             x += 12
+        if title.startswith("Detail · full rank table"):
+            for p in inner:
+                p["gridPos"]["h"] = 19
+            bottom = max(p["gridPos"]["y"] + p["gridPos"]["h"] for p in inner)
         if title in expanded:               # open by default: panels sit at top level, after the row
             P.append(r)
             P += inner
@@ -355,7 +359,7 @@ FROM r ORDER BY o"""
         "timezone": "browser", "editable": True, "graphTooltip": 1,
         "time": {"from": "2026-03-01T00:00:00.000Z", "to": "2026-10-10T00:00:00.000Z"},
         "timepicker": {"hidden": True},
-        "schemaVersion": 39, "version": 30,
+        "schemaVersion": 39, "version": 31,
         "panels": P,
     }
 
