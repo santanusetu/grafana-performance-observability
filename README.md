@@ -6,6 +6,8 @@ The pipeline is sport-agnostic in shape: ingest match events, model them as team
 
 **Live dashboard (case study):** [Astros+ 2026 — Signals: Strengths and Opportunities](https://ardentsailboat1497.grafana.net/public-dashboards/6dfa470ce5304898a50712c39834bd14)
 
+![Dashboard header: headline signals and the wins-vs-losses checkpoint view](docs/screenshots/01-headline-and-wins-vs-losses.png)
+
 ## The approach
 
 | Observability idea | Applied to team performance |
@@ -30,6 +32,30 @@ The pipeline is sport-agnostic in shape: ingest match events, model them as team
 - Bowling is at semi-final standard (economy 7.36 vs 7.48).
 - In the 4 Summer losses the team was 84 for 7 after 15 overs; in the 5 wins, 112 for 5. Every loss included a batting collapse.
 - The league's scoring rate rose 28% between Spring and Summer; the team's stayed flat.
+
+## Screenshots
+
+**Where the gap to the top 4 teams opens up, phase by phase**
+![Runs short of the semi-finalists, wickets lost and economy by phase](docs/screenshots/02-gap-to-semifinalists-by-phase.png)
+
+**Benchmarking against the league average**
+![Every metric as a percentage above or below the league average](docs/screenshots/03-vs-division-average.png)
+
+**How the league shifted between seasons, and whether the team adapted**
+![Spring to Summer change for the league vs the team](docs/screenshots/04-league-shift-spring-to-summer.png)
+
+**Checkpoints and insights**
+![Possible checkpoints for future games and key insights](docs/screenshots/05-checkpoints-and-insights.png)
+
+<details>
+<summary>Detail tables: full rank table and season-on-season rank changes</summary>
+
+![Rank out of 16 for every metric, vs the semi-finalists and the league](docs/screenshots/06-rank-table.png)
+![Rank changes between Spring and Summer](docs/screenshots/07-rank-changes.png)
+
+</details>
+
+[Full-page view](docs/screenshots/00-full-dashboard.png)
 
 ## Architecture
 
