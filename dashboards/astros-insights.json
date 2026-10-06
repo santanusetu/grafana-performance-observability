@@ -1,0 +1,1266 @@
+{
+  "uid": "astros-insights",
+  "title": "Astros+ Insights \u2014 NACL Summer 2026 Div A",
+  "description": "Where Astros+ stand against the semi-finalists and the rest of Div A.",
+  "tags": [
+    "cricket",
+    "astros",
+    "nacl"
+  ],
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "time": {
+    "from": "2026-07-01T00:00:00.000Z",
+    "to": "2026-10-10T00:00:00.000Z"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "schemaVersion": 39,
+  "version": 4,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "League record",
+      "description": "League games only, plus how far the team went in the knockouts.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT league_won || ' won \u00b7 ' || league_lost || ' lost  \u00b7  ' || finish AS v\nFROM cricket.team_summary WHERE team = 'Astros+' AND season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#4c8fd6"
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "id": 1
+    },
+    {
+      "type": "stat",
+      "title": "Net run rate",
+      "description": "Runs per over scored minus runs per over conceded. An all-out side is charged 20 overs.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 4,
+        "y": 0,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT value || '  \u00b7  ' || rank_label AS v FROM cricket.team_ranks WHERE team = 'Astros+' AND metric = 'Net run rate' AND season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#d29922"
+          },
+          "mappings": [
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b([1-5])(st|nd|rd|th) of 16.*",
+                "result": {
+                  "color": "#3fb950",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b(1[2-6])th of 16.*",
+                "result": {
+                  "color": "#f85149",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "id": 2
+    },
+    {
+      "type": "stat",
+      "title": "Batting run rate",
+      "description": "Runs per over across all innings batted.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 0,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT value || '  \u00b7  ' || rank_label AS v FROM cricket.team_ranks WHERE team = 'Astros+' AND metric = 'Run rate' AND season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#d29922"
+          },
+          "mappings": [
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b([1-5])(st|nd|rd|th) of 16.*",
+                "result": {
+                  "color": "#3fb950",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b(1[2-6])th of 16.*",
+                "result": {
+                  "color": "#f85149",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "id": 3
+    },
+    {
+      "type": "stat",
+      "title": "Bowling economy",
+      "description": "Runs conceded per over. Rank 1 = lowest.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT value || '  \u00b7  ' || rank_label AS v FROM cricket.team_ranks WHERE team = 'Astros+' AND metric = 'Economy' AND season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#d29922"
+          },
+          "mappings": [
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b([1-5])(st|nd|rd|th) of 16.*",
+                "result": {
+                  "color": "#3fb950",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b(1[2-6])th of 16.*",
+                "result": {
+                  "color": "#f85149",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "id": 4
+    },
+    {
+      "type": "stat",
+      "title": "Middle-over wickets lost",
+      "description": "Average wickets lost in the middle overs per innings. Rank 1 = fewest.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 0,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT wickets_per_innings || '  \u00b7  ' || cricket.ordinal(wickets_rank) || ' of 16' AS v FROM cricket.team_phase WHERE team = 'Astros+' AND side = 'batting' AND phase = 'middle' AND season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#d29922"
+          },
+          "mappings": [
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b([1-5])(st|nd|rd|th) of 16.*",
+                "result": {
+                  "color": "#3fb950",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b(1[2-6])th of 16.*",
+                "result": {
+                  "color": "#f85149",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "id": 5
+    },
+    {
+      "type": "stat",
+      "title": "Balls per 4 or 6",
+      "description": "Legal balls faced per 4 or 6. Rank 1 = most frequent boundaries.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 20,
+        "y": 0,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT value || '  \u00b7  ' || rank_label AS v FROM cricket.team_ranks WHERE team = 'Astros+' AND metric = 'Balls per boundary' AND season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#d29922"
+          },
+          "mappings": [
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b([1-5])(st|nd|rd|th) of 16.*",
+                "result": {
+                  "color": "#3fb950",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "regex",
+              "options": {
+                "pattern": ".*\\b(1[2-6])th of 16.*",
+                "result": {
+                  "color": "#f85149",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "id": 6
+    },
+    {
+      "type": "text",
+      "title": "Key insights",
+      "gridPos": {
+        "x": 0,
+        "y": 4,
+        "w": 9,
+        "h": 17
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "### What the season says\n\n**1. Bowling is already semi-final standard.**\nEconomy 7.36 vs 7.48 for the 4 semi-finalists, and 8.7 wickets a match (4th of 16).\nThe middle overs are the best phase: economy 6.73, 4th of 16.\n\n**2. The gap is the bat: about 21 runs an innings.**\nWe average 133; the semi-finalists average 154.\nRun rate 7.12 vs 8.37, and a boundary every 6.9 balls vs 5.2.\n\n**3. The runs go missing in all 3 phases.**\nPowerplay 6.43 vs 7.77 \u00b7 middle 7.24 vs 8.39 \u00b7 death 7.94 vs 9.44.\nWe protect wickets early (4th fewest lost) but don't cash them in.\n\n**4. Overs 7-15 are where innings break.**\n4.2 wickets lost, 11th of 16 (semi-finalists lose 3.6).\n\n**5. Leaking at both ends with the ball.**\nPowerplay and death economy are both 12th of 16.\n\n**6. Continuity.**\nWe used 26 batters across 9 games (13th of 16); the semi-finalists average 20.\n\n**7. Run-outs:** 0.33 a match, 12th of 16 (semi-finalists 0.78).\n\n<small>Source: CricClubs, NACL Summer 2026 Div A, all 68 matches. Ranks are out of 16 teams.</small>"
+      },
+      "id": 7
+    },
+    {
+      "type": "table",
+      "title": "Where Astros+ ranks (out of 16) vs the semi-finalists",
+      "description": "Rank 1 = best in Div A for that metric. Green = top 5, red = bottom 5.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 9,
+        "y": 4,
+        "w": 15,
+        "h": 17
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT r.category AS \"Area\", r.metric AS \"Metric\", r.value AS \"Astros+\", r.rank AS \"Rank\",\n       r.top4_avg AS \"Semi-finalists avg\",\n       r.league_avg AS \"League avg\", r.best_team || ' (' || r.best_value || ')' AS \"Best in Div A\"\nFROM cricket.team_ranks r\nWHERE r.team = 'Astros+' AND r.season = 'Summer 2026'\nORDER BY r.sort_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rank"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 70
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3fb950",
+                      "value": null
+                    },
+                    {
+                      "color": "#d29922",
+                      "value": 6
+                    },
+                    {
+                      "color": "#f85149",
+                      "value": 12
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Area"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metric"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              }
+            ]
+          }
+        ]
+      },
+      "id": 8
+    },
+    {
+      "type": "barchart",
+      "title": "Batting run rate by phase",
+      "description": "Runs per over in each phase. Higher is better.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 21,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) || CASE p.phase WHEN 'powerplay' THEN ' (1-6)' WHEN 'middle' THEN ' (7-15)' ELSE ' (16-20)' END AS phase,\n       p.run_rate AS \"Astros+\",\n       round(avg(q.run_rate) FILTER (WHERE s.top4), 2) AS \"Semi-finalists\",\n       round(avg(q.run_rate), 2) AS \"League average\"\nFROM cricket.team_phase p\nJOIN cricket.team_phase q ON q.season = p.season AND q.side = p.side AND q.phase = p.phase\nJOIN cricket.team_summary s ON s.season = q.season AND s.team = q.team\nWHERE p.team = 'Astros+' AND p.side = 'batting' AND p.season = 'Summer 2026'\nGROUP BY p.phase, p.phase_order, p.run_rate\nORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "groupWidth": 0.8,
+        "barWidth": 0.9,
+        "stacking": "none",
+        "text": {
+          "valueSize": 12
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "fillOpacity": 85,
+            "axisLabel": "runs per over"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "League average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 9
+    },
+    {
+      "type": "barchart",
+      "title": "Bowling economy by phase",
+      "description": "Runs conceded per over in each phase. Lower is better.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 21,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) || CASE p.phase WHEN 'powerplay' THEN ' (1-6)' WHEN 'middle' THEN ' (7-15)' ELSE ' (16-20)' END AS phase,\n       p.run_rate AS \"Astros+\",\n       round(avg(q.run_rate) FILTER (WHERE s.top4), 2) AS \"Semi-finalists\",\n       round(avg(q.run_rate), 2) AS \"League average\"\nFROM cricket.team_phase p\nJOIN cricket.team_phase q ON q.season = p.season AND q.side = p.side AND q.phase = p.phase\nJOIN cricket.team_summary s ON s.season = q.season AND s.team = q.team\nWHERE p.team = 'Astros+' AND p.side = 'bowling' AND p.season = 'Summer 2026'\nGROUP BY p.phase, p.phase_order, p.run_rate\nORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "groupWidth": 0.8,
+        "barWidth": 0.9,
+        "stacking": "none",
+        "text": {
+          "valueSize": 12
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "fillOpacity": 85,
+            "axisLabel": "runs per over"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "League average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 10
+    },
+    {
+      "type": "barchart",
+      "title": "Wickets lost per innings, by phase",
+      "description": "Average wickets lost in each phase. Lower is better.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 21,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) || CASE p.phase WHEN 'powerplay' THEN ' (1-6)' WHEN 'middle' THEN ' (7-15)' ELSE ' (16-20)' END AS phase,\n       p.wickets_per_innings AS \"Astros+\",\n       round(avg(q.wickets_per_innings) FILTER (WHERE s.top4), 2) AS \"Semi-finalists\",\n       round(avg(q.wickets_per_innings), 2) AS \"League average\"\nFROM cricket.team_phase p\nJOIN cricket.team_phase q ON q.season = p.season AND q.side = p.side AND q.phase = p.phase\nJOIN cricket.team_summary s ON s.season = q.season AND s.team = q.team\nWHERE p.team = 'Astros+' AND p.side = 'batting' AND p.season = 'Summer 2026'\nGROUP BY p.phase, p.phase_order, p.wickets_per_innings\nORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "groupWidth": 0.8,
+        "barWidth": 0.9,
+        "stacking": "none",
+        "text": {
+          "valueSize": 12
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "fillOpacity": 85,
+            "axisLabel": "wickets"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "League average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 11
+    },
+    {
+      "type": "trend",
+      "title": "Average score at the end of each over",
+      "description": "Cumulative runs, averaged over every innings that reached that over.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 30,
+        "w": 12,
+        "h": 10
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT b.over_no AS \"Over\",\n       max(b.avg_cum_runs) FILTER (WHERE b.team = 'Astros+') AS \"Astros+\",\n       round(avg(b.avg_cum_runs) FILTER (WHERE s.top4), 1) AS \"Semi-finalists\",\n       max(b.avg_cum_runs) FILTER (WHERE b.team = 'League average') AS \"League average\"\nFROM cricket.over_baseline b\nLEFT JOIN cricket.team_summary s ON s.season = b.season AND s.team = b.team\nWHERE b.season = 'Summer 2026'\nGROUP BY b.over_no ORDER BY b.over_no",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "Over",
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "custom": {
+            "lineWidth": 2,
+            "showPoints": "never",
+            "axisLabel": "runs"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Over"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "over"
+              },
+              {
+                "id": "min",
+                "value": 1
+              },
+              {
+                "id": "max",
+                "value": 20
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 4
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "League average"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    10
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 12
+    },
+    {
+      "type": "trend",
+      "title": "Quarter-final chase vs Money Heist (target 161): our run rate vs required rate",
+      "description": "Like an SLA chart: the required rate is the threshold, our run rate is the measurement. Bars show wickets down. Axis capped at 16: the required rate passes it in the last 2 overs.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 30,
+        "w": 12,
+        "h": 10
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT over_no AS \"Over\", run_rate_so_far AS \"Our run rate\",\n       required_rate_at_start_of_over AS \"Required rate\", cum_wickets AS \"Wickets down\"\nFROM cricket.chase_progress\nWHERE team = 'Astros+' AND stage = 'Quarter Final' AND season = 'Summer 2026'\nORDER BY over_no",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "Over",
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "max": 16,
+          "min": 0,
+          "custom": {
+            "lineWidth": 2,
+            "showPoints": "auto",
+            "axisLabel": "runs per over"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Over"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "over"
+              },
+              {
+                "id": "min",
+                "value": 1
+              },
+              {
+                "id": "max",
+                "value": 20
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Our run rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 4
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Required rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#f85149"
+                }
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    10
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Wickets down"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 40
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "wickets"
+              },
+              {
+                "id": "max",
+                "value": 10
+              }
+            ]
+          }
+        ]
+      },
+      "id": 13
+    },
+    {
+      "type": "table",
+      "title": "Season results",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 40,
+        "w": 24,
+        "h": 12
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT to_char(match_date, 'Dy DD Mon') AS \"Date\", stage AS \"Stage\", opponent AS \"Opponent\", batting_order AS \"Innings\",\n       score_for AS \"Our score\", score_against AS \"Their score\", result AS \"Result\", margin AS \"Margin\"\nFROM cricket.match_log WHERE team = 'Astros+' AND season = 'Summer 2026' ORDER BY match_date",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Result"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "Won": {
+                        "color": "#3fb950",
+                        "index": 0
+                      },
+                      "Lost": {
+                        "color": "#f85149",
+                        "index": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "id": 14
+    }
+  ]
+}

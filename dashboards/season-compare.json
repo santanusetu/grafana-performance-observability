@@ -1,0 +1,1009 @@
+{
+  "uid": "astros-season-compare",
+  "title": "Astros+ \u2014 Spring 2026 vs Summer 2026 (Div A)",
+  "description": "How Astros+ changed from Spring 2026 to Summer 2026, measured against the division each season.",
+  "tags": [
+    "cricket",
+    "astros",
+    "nacl"
+  ],
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "time": {
+    "from": "2026-03-01T00:00:00.000Z",
+    "to": "2026-10-10T00:00:00.000Z"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "schemaVersion": 39,
+  "version": 1,
+  "links": [
+    {
+      "title": "Summer 2026 insights",
+      "type": "link",
+      "url": "/d/astros-insights",
+      "icon": "dashboard"
+    }
+  ],
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Finish",
+      "description": "How far Astros+ went: Spring 2026 \u2192 Summer 2026.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT max(finish) FILTER (WHERE season = 'Spring 2026') || '  \u2192  ' || max(finish) FILTER (WHERE season = 'Summer 2026') AS v\nFROM cricket.team_summary WHERE team = 'Astros+'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#4c8fd6"
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "id": 1
+    },
+    {
+      "type": "stat",
+      "title": "Division run rate (conditions)",
+      "description": "Average run rate across the whole division each season. Scoring rose sharply in Summer, so raw numbers are not comparable; ranks are.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT max(league_avg) FILTER (WHERE season = 'Spring 2026') || '  \u2192  ' || max(league_avg) FILTER (WHERE season = 'Summer 2026') AS v\nFROM cricket.team_ranks WHERE metric = 'Run rate'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#4c8fd6"
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "id": 2
+    },
+    {
+      "type": "stat",
+      "title": "Batting run rate rank",
+      "description": "Rank out of the division, Spring 2026 \u2192 Summer 2026.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT o.rank_label || '  \u2192  ' || n.rank_label AS v\nFROM cricket.team_ranks o JOIN cricket.team_ranks n USING (team, metric)\nWHERE team = 'Astros+' AND metric = 'Run rate' AND o.season = 'Spring 2026' AND n.season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#4c8fd6"
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "id": 3
+    },
+    {
+      "type": "stat",
+      "title": "Bowling economy rank",
+      "description": "Rank out of the division, Spring 2026 \u2192 Summer 2026. Rank 1 = lowest.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 18,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT o.rank_label || '  \u2192  ' || n.rank_label AS v\nFROM cricket.team_ranks o JOIN cricket.team_ranks n USING (team, metric)\nWHERE team = 'Astros+' AND metric = 'Economy' AND o.season = 'Spring 2026' AND n.season = 'Summer 2026'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#4c8fd6"
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "id": 4
+    },
+    {
+      "type": "text",
+      "title": "What changed",
+      "gridPos": {
+        "x": 0,
+        "y": 4,
+        "w": 9,
+        "h": 18
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "### Spring \u2192 Summer: what changed\n\n**1. The division scored a lot more in Summer.**\nLeague run rate 5.76 \u2192 7.35 (+28%); average score 104 \u2192 133.\nThat is why this page compares ranks, not raw numbers.\n\n**2. Our batting stood still while the league moved.**\nRun rate 7.20 \u2192 7.12 and average score 133 \u2192 133.\nThat made us the best batting side in Spring (1st of 16) and 11th in Summer.\n\n**3. The middle overs are the biggest change.**\nWickets lost in overs 7-15: 2.25 \u2192 4.22 (1st \u2192 11th).\nDeath-overs scoring fell too: 9.53 \u2192 7.94 (1st \u2192 11th).\n\n**4. The bowling improved, relative to the division.**\nEconomy rank 15th \u2192 8th, dot balls 16th \u2192 5th, wickets per match 12th \u2192 4th.\n\n**5. Both knockout exits were chases that ended all out.**\nSpring QF: 102 all out chasing 120. Summer QF: 133 all out chasing 161.\nWe were bowled out once in Spring and 4 times in Summer.\n\n**6. More rotation.** Batters used: 22 \u2192 26.\n\n**7. Same result both times:** quarter-finalists (league 5-2 \u2192 5-3).\n\n<small>11 of the 16 Div A teams played both seasons. Spring excludes 5 matches with no result. Source: CricClubs.</small>"
+      },
+      "id": 5
+    },
+    {
+      "type": "table",
+      "title": "Astros+ rank by metric: Spring 2026 vs Summer 2026",
+      "description": "Rank out of the division in each season (1 = best). 'Places moved' is positive when the rank improved.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 9,
+        "y": 4,
+        "w": 15,
+        "h": 18
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT o.category AS \"Area\", o.metric AS \"Metric\",\n       o.value AS \"Spring\", o.rank AS \"Spring rank\",\n       n.value AS \"Summer\", n.rank AS \"Summer rank\",\n       o.rank - n.rank AS \"Places moved\",\n       n.top4_avg AS \"Top 4 avg, Summer\"\nFROM cricket.team_ranks o JOIN cricket.team_ranks n USING (team, metric)\nWHERE team = 'Astros+' AND o.season = 'Spring 2026' AND n.season = 'Summer 2026'\nORDER BY o.sort_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spring rank"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.width",
+                "value": 95
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3fb950",
+                      "value": null
+                    },
+                    {
+                      "color": "#d29922",
+                      "value": 6
+                    },
+                    {
+                      "color": "#f85149",
+                      "value": 12
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Summer rank"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.width",
+                "value": 95
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3fb950",
+                      "value": null
+                    },
+                    {
+                      "color": "#d29922",
+                      "value": 6
+                    },
+                    {
+                      "color": "#f85149",
+                      "value": 12
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Places moved"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#f85149",
+                      "value": null
+                    },
+                    {
+                      "color": "#8b949e",
+                      "value": 0
+                    },
+                    {
+                      "color": "#3fb950",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Area"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metric"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          }
+        ]
+      },
+      "id": 6
+    },
+    {
+      "type": "barchart",
+      "title": "Batting run rate by phase",
+      "description": "Higher is better.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 22,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) AS phase,\n       max(p.run_rate) FILTER (WHERE p.season = 'Spring 2026' AND p.team = 'Astros+') AS \"Astros+ Spring\",\n       max(p.run_rate) FILTER (WHERE p.season = 'Summer 2026' AND p.team = 'Astros+') AS \"Astros+ Summer\",\n       round(avg(p.run_rate) FILTER (WHERE p.season = 'Summer 2026' AND s.top4), 2)  AS \"Top 4, Summer\"\nFROM cricket.team_phase p\nJOIN cricket.team_summary s ON s.season = p.season AND s.team = p.team\nWHERE p.side = 'batting'\nGROUP BY p.phase, p.phase_order ORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "groupWidth": 0.8,
+        "barWidth": 0.9,
+        "stacking": "none",
+        "text": {
+          "valueSize": 12
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "fillOpacity": 85,
+            "axisLabel": "runs per over"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Spring"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#a371f7"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Top 4, Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 7
+    },
+    {
+      "type": "barchart",
+      "title": "Bowling economy by phase",
+      "description": "Lower is better.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 22,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) AS phase,\n       max(p.run_rate) FILTER (WHERE p.season = 'Spring 2026' AND p.team = 'Astros+') AS \"Astros+ Spring\",\n       max(p.run_rate) FILTER (WHERE p.season = 'Summer 2026' AND p.team = 'Astros+') AS \"Astros+ Summer\",\n       round(avg(p.run_rate) FILTER (WHERE p.season = 'Summer 2026' AND s.top4), 2)  AS \"Top 4, Summer\"\nFROM cricket.team_phase p\nJOIN cricket.team_summary s ON s.season = p.season AND s.team = p.team\nWHERE p.side = 'bowling'\nGROUP BY p.phase, p.phase_order ORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "groupWidth": 0.8,
+        "barWidth": 0.9,
+        "stacking": "none",
+        "text": {
+          "valueSize": 12
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "fillOpacity": 85,
+            "axisLabel": "runs per over"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Spring"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#a371f7"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Top 4, Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 8
+    },
+    {
+      "type": "barchart",
+      "title": "Wickets lost per innings, by phase",
+      "description": "Lower is better.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 22,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) AS phase,\n       max(p.wickets_per_innings) FILTER (WHERE p.season = 'Spring 2026' AND p.team = 'Astros+') AS \"Astros+ Spring\",\n       max(p.wickets_per_innings) FILTER (WHERE p.season = 'Summer 2026' AND p.team = 'Astros+') AS \"Astros+ Summer\",\n       round(avg(p.wickets_per_innings) FILTER (WHERE p.season = 'Summer 2026' AND s.top4), 2)  AS \"Top 4, Summer\"\nFROM cricket.team_phase p\nJOIN cricket.team_summary s ON s.season = p.season AND s.team = p.team\nWHERE p.side = 'batting'\nGROUP BY p.phase, p.phase_order ORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "groupWidth": 0.8,
+        "barWidth": 0.9,
+        "stacking": "none",
+        "text": {
+          "valueSize": 12
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "min": 0,
+          "custom": {
+            "fillOpacity": 85,
+            "axisLabel": "wickets"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Spring"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#a371f7"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Top 4, Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 9
+    },
+    {
+      "type": "trend",
+      "title": "Average score at the end of each over",
+      "description": "Cumulative runs, averaged over every innings that reached that over. Dashed lines = division average.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 31,
+        "w": 12,
+        "h": 10
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT over_no AS \"Over\",\n       max(avg_cum_runs) FILTER (WHERE season = 'Spring 2026' AND team = 'Astros+') AS \"Astros+ Spring\",\n       max(avg_cum_runs) FILTER (WHERE season = 'Summer 2026' AND team = 'Astros+') AS \"Astros+ Summer\",\n       max(avg_cum_runs) FILTER (WHERE season = 'Spring 2026' AND team = 'League average') AS \"League avg Spring\",\n       max(avg_cum_runs) FILTER (WHERE season = 'Summer 2026' AND team = 'League average') AS \"League avg Summer\"\nFROM cricket.over_baseline GROUP BY over_no ORDER BY over_no",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "Over",
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "custom": {
+            "lineWidth": 3,
+            "showPoints": "never",
+            "axisLabel": "runs"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Over"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "over"
+              },
+              {
+                "id": "min",
+                "value": 1
+              },
+              {
+                "id": "max",
+                "value": 20
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Spring"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#a371f7"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+ Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "League avg Spring"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#a371f7"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    8,
+                    8
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "League avg Summer"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    8,
+                    8
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 10
+    },
+    {
+      "type": "table",
+      "title": "Spring 2026 results",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 31,
+        "w": 12,
+        "h": 10
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT to_char(match_date, 'DD Mon') AS \"Date\", stage AS \"Stage\", opponent AS \"Opponent\",\n       score_for AS \"Our score\", score_against AS \"Their score\", result AS \"Result\", margin AS \"Margin\"\nFROM cricket.match_log WHERE team = 'Astros+' AND season = 'Spring 2026' ORDER BY match_date",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Result"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "value",
+                    "options": {
+                      "Won": {
+                        "color": "#3fb950",
+                        "index": 0
+                      },
+                      "Lost": {
+                        "color": "#f85149",
+                        "index": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "id": 11
+    }
+  ]
+}

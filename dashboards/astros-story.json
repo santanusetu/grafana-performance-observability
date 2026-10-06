@@ -1,0 +1,1650 @@
+{
+  "uid": "astros-insights",
+  "title": "Astros+ 2026 \u2014 Signals: Strengths and Opportunities",
+  "description": "Performance analysis of Astros+ in NACL Div A, Spring and Summer 2026.",
+  "tags": [
+    "cricket",
+    "astros",
+    "nacl",
+    "performance-analysis"
+  ],
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "time": {
+    "from": "2026-03-01T00:00:00.000Z",
+    "to": "2026-10-10T00:00:00.000Z"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "schemaVersion": 39,
+  "version": 30,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Bowling: level with the semi-finalists",
+      "description": "Runs conceded per over: ours vs the average of the 4 semi-finalists.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT 'Economy ' || value || '  vs  ' || top4_avg FROM cricket.team_ranks\nWHERE team = 'Astros+' AND season = 'Summer 2026' AND metric = 'Economy'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#2ea043"
+          }
+        },
+        "overrides": []
+      },
+      "id": 1
+    },
+    {
+      "type": "stat",
+      "title": "Batting: well behind others",
+      "description": "Runs scored per over: ours vs the average of the 4 semi-finalists.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT 'Run rate ' || value || '  vs  ' || top4_avg FROM cricket.team_ranks\nWHERE team = 'Astros+' AND season = 'Summer 2026' AND metric = 'Run rate'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#f85149"
+          }
+        },
+        "overrides": []
+      },
+      "id": 2
+    },
+    {
+      "type": "stat",
+      "title": "Losses that included a batting collapse",
+      "description": "Collapse = 3 or more wickets inside 3 overs, before the last 3 overs.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT count(c.match_id) || ' of ' || count(*) FROM cricket.match_log l\nLEFT JOIN cricket.collapses c ON c.match_id = l.match_id AND c.team = l.team\nWHERE l.team = 'Astros+' AND l.season = 'Summer 2026' AND l.result = 'Lost'",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#f85149"
+          }
+        },
+        "overrides": []
+      },
+      "id": 3
+    },
+    {
+      "type": "stat",
+      "title": "Score that wins batting first",
+      "description": "Median first-innings score of Div A teams that batted first and won, vs our average score.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 18,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY runs)::int || '  \u00b7  we average ' ||\n       (SELECT round(avg_score)::int FROM cricket.team_summary WHERE team = 'Astros+' AND season = 'Summer 2026')\nFROM cricket.team_innings WHERE season = 'Summer 2026' AND batted_first AND won",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "wideLayout": true
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "#4c8fd6"
+          }
+        },
+        "overrides": []
+      },
+      "id": 4
+    },
+    {
+      "type": "row",
+      "title": "1 \u00b7 The game is decided by over 15",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 4,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 5
+    },
+    {
+      "type": "trend",
+      "title": "Our score, over by over: wins vs losses",
+      "description": "Average score at the end of each over. The lines split after the powerplay and are 28 runs apart by over 15.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 15,
+        "h": 10
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT o.over_no AS \"Over\",\n       round(avg(o.cum_runs) FILTER (WHERE o.team = 'Astros+' AND o.result = 'Won'), 1)  AS \"Our wins\",\n       round(avg(o.cum_runs) FILTER (WHERE o.team = 'Astros+' AND o.result = 'Lost'), 1) AS \"Our losses\",\n       round(avg(o.cum_runs) FILTER (WHERE s.top4), 1)                                  AS \"Semi-finalists (all games)\"\nFROM cricket.innings_overs o\nJOIN cricket.team_summary s ON s.season = o.season AND s.team = o.team\nWHERE o.season = 'Summer 2026'\nGROUP BY o.over_no ORDER BY o.over_no",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "Over",
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "min": 0,
+          "custom": {
+            "lineWidth": 3,
+            "showPoints": "never",
+            "axisLabel": "runs"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Over"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "over"
+              },
+              {
+                "id": "min",
+                "value": 1
+              },
+              {
+                "id": "max",
+                "value": 20
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Our wins"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Our losses"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#f85149"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists (all games)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    8,
+                    8
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 6
+    },
+    {
+      "type": "table",
+      "title": "Checkpoints: wins vs losses (Summer)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 15,
+        "y": 5,
+        "w": 9,
+        "h": 10
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "WITH g AS (\n    SELECT result, match_id,\n           max(cum_runs) FILTER (WHERE over_no = 6)  AS r6,  max(cum_wickets) FILTER (WHERE over_no = 6)  AS w6,\n           max(cum_runs) FILTER (WHERE over_no = 15) AS r15, max(cum_wickets) FILTER (WHERE over_no = 15) AS w15,\n           max(final_runs) AS fr, max(dots_faced) * 100.0 / max(legal_balls) AS dots\n    FROM cricket.innings_overs WHERE team = 'Astros+' AND season = 'Summer 2026' GROUP BY result, match_id\n)\nSELECT 'After 6 overs' AS \"Checkpoint\",\n       round(avg(r6) FILTER (WHERE result = 'Won')) || ' for ' || round(avg(w6) FILTER (WHERE result = 'Won')) AS \"Our wins\",\n       round(avg(r6) FILTER (WHERE result = 'Lost')) || ' for ' || round(avg(w6) FILTER (WHERE result = 'Lost')) AS \"Our losses\", 1 AS o FROM g\nUNION ALL\nSELECT 'After 15 overs',\n       round(avg(r15) FILTER (WHERE result = 'Won')) || ' for ' || round(avg(w15) FILTER (WHERE result = 'Won')),\n       round(avg(r15) FILTER (WHERE result = 'Lost')) || ' for ' || round(avg(w15) FILTER (WHERE result = 'Lost')), 2 FROM g\nUNION ALL\nSELECT 'Final score', round(avg(fr) FILTER (WHERE result = 'Won'))::text, round(avg(fr) FILTER (WHERE result = 'Lost'))::text, 3 FROM g\nUNION ALL\nSELECT 'Dot balls faced', round(avg(dots) FILTER (WHERE result = 'Won')) || '%', round(avg(dots) FILTER (WHERE result = 'Lost')) || '%', 4 FROM g\nUNION ALL\nSELECT 'Games', count(*) FILTER (WHERE result = 'Won')::text, count(*) FILTER (WHERE result = 'Lost')::text, 5 FROM g\nORDER BY o",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "md",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "o"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Checkpoint"
+            },
+            "properties": [
+              {
+                "id": "custom.align",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Our wins"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Our losses"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#f85149"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 7
+    },
+    {
+      "type": "row",
+      "title": "2 \u00b7 Where we lose ground to the semi-finalists",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 15,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 8
+    },
+    {
+      "type": "barchart",
+      "title": "Batting: runs short of the semi-finalists, per innings",
+      "description": "Our run rate minus the semi-finalists' in each phase, times the overs in that phase. About 26 runs over a full innings.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) || CASE p.phase WHEN 'powerplay' THEN ' (6 overs)' WHEN 'middle' THEN ' (9 overs)' ELSE ' (5 overs)' END AS phase,\n       round((p.run_rate - avg(q.run_rate) FILTER (WHERE s.top4))\n             * CASE p.phase WHEN 'powerplay' THEN 6 WHEN 'middle' THEN 9 ELSE 5 END, 1) AS \"Runs vs semi-finalists\"\nFROM cricket.team_phase p\nJOIN cricket.team_phase q ON q.season = p.season AND q.side = p.side AND q.phase = p.phase\nJOIN cricket.team_summary s ON s.season = q.season AND s.team = q.team\nWHERE p.team = 'Astros+' AND p.side = 'batting' AND p.season = 'Summer 2026'\nGROUP BY p.phase, p.phase_order, p.run_rate ORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "stacking": "none",
+        "groupWidth": 0.75,
+        "barWidth": 0.9,
+        "text": {
+          "valueSize": 12
+        },
+        "xTickLabelRotation": 0,
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "custom": {
+            "fillOpacity": 85
+          },
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#f85149",
+                "value": null
+              },
+              {
+                "color": "#3fb950",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "id": 9
+    },
+    {
+      "type": "barchart",
+      "title": "Batting: wickets lost per innings, by phase",
+      "description": "Lower is better. The middle overs are where we lose wickets faster than the semi-finalists.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 16,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) || CASE p.phase WHEN 'powerplay' THEN ' (1-6)' WHEN 'middle' THEN ' (7-15)' ELSE ' (16-20)' END AS phase,\n       p.wickets_per_innings AS \"Astros+\",\n       round(avg(q.wickets_per_innings) FILTER (WHERE s.top4), 2) AS \"Semi-finalists\"\nFROM cricket.team_phase p\nJOIN cricket.team_phase q ON q.season = p.season AND q.side = p.side AND q.phase = p.phase\nJOIN cricket.team_summary s ON s.season = q.season AND s.team = q.team\nWHERE p.team = 'Astros+' AND p.side = 'batting' AND p.season = 'Summer 2026'\nGROUP BY p.phase, p.phase_order, p.wickets_per_innings ORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "stacking": "none",
+        "groupWidth": 0.75,
+        "barWidth": 0.9,
+        "text": {
+          "valueSize": 12
+        },
+        "xTickLabelRotation": 0,
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "custom": {
+            "fillOpacity": 85
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 10
+    },
+    {
+      "type": "barchart",
+      "title": "Bowling: runs conceded per over, by phase",
+      "description": "Lower is better. Our middle overs are tighter than the semi-finalists'; the powerplay is where we leak.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 16,
+        "w": 8,
+        "h": 9
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT initcap(p.phase) || CASE p.phase WHEN 'powerplay' THEN ' (1-6)' WHEN 'middle' THEN ' (7-15)' ELSE ' (16-20)' END AS phase,\n       p.run_rate AS \"Astros+\",\n       round(avg(q.run_rate) FILTER (WHERE s.top4), 2) AS \"Semi-finalists\"\nFROM cricket.team_phase p\nJOIN cricket.team_phase q ON q.season = p.season AND q.side = p.side AND q.phase = p.phase\nJOIN cricket.team_summary s ON s.season = q.season AND s.team = q.team\nWHERE p.team = 'Astros+' AND p.side = 'bowling' AND p.season = 'Summer 2026'\nGROUP BY p.phase, p.phase_order, p.run_rate ORDER BY p.phase_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "phase",
+        "orientation": "vertical",
+        "showValue": "always",
+        "stacking": "none",
+        "groupWidth": 0.75,
+        "barWidth": 0.9,
+        "text": {
+          "valueSize": 12
+        },
+        "xTickLabelRotation": 0,
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "custom": {
+            "fillOpacity": 85
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Semi-finalists"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#3fb950"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 11
+    },
+    {
+      "type": "row",
+      "title": "3 \u00b7 Us vs the rest of Div A: where we are better, where we are worse",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 25,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 12
+    },
+    {
+      "type": "barchart",
+      "title": "Summer 2026: how we compare with the division average",
+      "description": "Percentage difference from the Div A average for each measure, flipped so that positive always means better for us (e.g. fewer dot balls faced counts as positive).",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 26,
+        "w": 14,
+        "h": 12
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT metric AS \"Metric\",\n       round(100.0 * CASE WHEN higher_is_better THEN 1 ELSE -1 END * (value - league_avg) / abs(league_avg), 1)\n           AS \"Better (+) or worse (\u2212) than the division average\"\nFROM cricket.team_ranks\nWHERE team = 'Astros+' AND season = 'Summer 2026' AND metric NOT IN ('Net run rate', 'Average score')\nORDER BY 2 DESC",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "Metric",
+        "orientation": "horizontal",
+        "showValue": "always",
+        "stacking": "none",
+        "groupWidth": 0.75,
+        "barWidth": 0.9,
+        "text": {
+          "valueSize": 12
+        },
+        "xTickLabelRotation": 0,
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 1,
+          "custom": {
+            "fillOpacity": 85
+          },
+          "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#f85149",
+                "value": null
+              },
+              {
+                "color": "#3fb950",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "id": 13
+    },
+    {
+      "type": "text",
+      "title": "Analysis: performance relative to the division",
+      "gridPos": {
+        "x": 14,
+        "y": 26,
+        "w": 10,
+        "h": 12
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "**Methodology.** Each bar shows Astros+ performance relative to the Division A average, expressed as a percentage. Values are normalised so that a positive figure (green) always indicates above-average performance and a negative figure (red) indicates below-average performance.\n\n**Areas of strength**\n- **Bowling effectiveness:** wicket-taking (+8%) and dot-ball percentage (+3%) both exceed the division average.\n- **Discipline in the field:** catching (+6%) and control of wides (+5%) are above average.\n\n**Areas for improvement**\n- **Squad continuity:** 26 batters were used during the season, against a division average of 21.\n- **Run-outs effected:** 0.33 per match, against a division average of 0.61.\n- **Batting tempo:** boundary frequency is below average and dot-ball percentage is above average. Six-hitting is the one exception, marginally above average.\n\n**Summary.** Astros+ currently perform in line with an average Division A side. The semi-finalists are differentiated from the division primarily by their batting."
+      },
+      "id": 14
+    },
+    {
+      "type": "row",
+      "title": "4 \u00b7 The league changed between Spring and Summer. Did we?",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 38,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 15
+    },
+    {
+      "type": "barchart",
+      "title": "Change from Spring to Summer, %",
+      "description": "How much each measure moved between the two seasons, for the whole division and for us.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 39,
+        "w": 14,
+        "h": 12
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "WITH r AS (\n    SELECT metric AS m, sort_order AS o,\n           max(league_avg) FILTER (WHERE season = 'Spring 2026') AS l0, max(league_avg) FILTER (WHERE season = 'Summer 2026') AS l1,\n           max(value) FILTER (WHERE season = 'Spring 2026' AND team = 'Astros+') AS u0,\n           max(value) FILTER (WHERE season = 'Summer 2026' AND team = 'Astros+') AS u1\n    FROM cricket.team_ranks\n    WHERE metric IN ('Run rate', 'Sixes per innings', 'Dot balls faced %', 'Economy')\n    GROUP BY metric, sort_order\n    UNION ALL\n    SELECT 'Boundaries per over', 3,\n           6.0 / max(league_avg) FILTER (WHERE season = 'Spring 2026'), 6.0 / max(league_avg) FILTER (WHERE season = 'Summer 2026'),\n           6.0 / max(value) FILTER (WHERE season = 'Spring 2026' AND team = 'Astros+'),\n           6.0 / max(value) FILTER (WHERE season = 'Summer 2026' AND team = 'Astros+')\n    FROM cricket.team_ranks WHERE metric = 'Balls per boundary'\n    UNION ALL\n    SELECT 'Run rate, ' || phase, 20 + phase_order,\n           max(league_avg_run_rate) FILTER (WHERE season = 'Spring 2026'), max(league_avg_run_rate) FILTER (WHERE season = 'Summer 2026'),\n           max(run_rate) FILTER (WHERE season = 'Spring 2026' AND team = 'Astros+'),\n           max(run_rate) FILTER (WHERE season = 'Summer 2026' AND team = 'Astros+')\n    FROM cricket.team_phase WHERE side = 'batting' GROUP BY phase, phase_order\n)\nSELECT replace(replace(m, 'Economy', 'Runs conceded per over (bowling)'), 'Run rate', 'Run rate') AS \"Measure\",\n       round(100 * (l1 - l0) / l0) AS \"Division\",\n       round(100 * (u1 - u0) / u0) AS \"Astros+\"\nFROM r ORDER BY o",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "xField": "Measure",
+        "orientation": "horizontal",
+        "showValue": "always",
+        "stacking": "none",
+        "groupWidth": 0.75,
+        "barWidth": 0.9,
+        "text": {
+          "valueSize": 12
+        },
+        "xTickLabelRotation": 0,
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 0,
+          "custom": {
+            "fillOpacity": 85
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Division"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#8b949e"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "#4c8fd6"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "id": 16
+    },
+    {
+      "type": "text",
+      "title": "Analysis: change between seasons",
+      "gridPos": {
+        "x": 14,
+        "y": 39,
+        "w": 10,
+        "h": 12
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "**Methodology.** Each pair of bars shows the percentage change in a measure between the Spring and Summer seasons, for the division as a whole (grey) and for Astros+ (blue).\n\n**Division-wide trend**\n- Boundary frequency increased by 65% and six-hitting by 61%.\n- Scoring rates rose in every phase of the innings, with an overall increase of 28%.\n\n**Astros+ response**\n- Run rate and boundary frequency remained broadly unchanged.\n- Dot-ball percentage increased by 6%, while the division recorded a 6% reduction.\n- Scoring in the death overs declined by 17%.\n\n**Bowling.** Astros+ adapted more effectively than the division with the ball: runs conceded per over rose by 10%, compared with 28% across the division. This underpins the improvement in the economy ranking from 15th to 8th."
+      },
+      "id": 17
+    },
+    {
+      "type": "row",
+      "title": "5 \u00b7 What to fix",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 51,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 18
+    },
+    {
+      "type": "text",
+      "title": "Possible checkpoints for future games",
+      "gridPos": {
+        "x": 0,
+        "y": 52,
+        "w": 24,
+        "h": 8
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "### Possible checkpoints\n\n| Checkpoint | In our wins | In our losses | **Where we want to be** |\n|---|---|---|---|\n| Score after 6 overs | 44 for 1 | 32 for 2 | **45+ with 1 down or fewer** |\n| Wickets down after 15 overs | 5 | 7 | **5 or fewer** \u2014 the single biggest difference |\n| Total batting first | 158 average | 102 average | **160+** (Div A teams that won batting first scored a median of 172) |\n\n**And keep doing:** bowl the middle overs the way we do (economy 6.73, better than the semi-finalists' 7.33), and take wickets (8.7 a match, 4th of 16)."
+      },
+      "id": 19
+    },
+    {
+      "type": "text",
+      "title": "Insights",
+      "gridPos": {
+        "x": 0,
+        "y": 60,
+        "w": 24,
+        "h": 5
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "## Our bowling is semi-final standard. We lose when the batting falls apart between overs 7 and 15.\n\nIn our **4 Summer losses** we were **84 for 7 after 15 overs**; in our **5 wins**, **112 for 5**. Every loss included a batting collapse (3+ wickets in 3 overs).\nMeanwhile the whole division learned to score faster between Spring and Summer (run rate **+28%**). **Our batting stayed where it was (\u22121%).**"
+      },
+      "id": 20
+    },
+    {
+      "type": "row",
+      "title": "Detail \u00b7 results, both seasons",
+      "collapsed": true,
+      "gridPos": {
+        "x": 0,
+        "y": 65,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [
+        {
+          "type": "table",
+          "title": "Season results",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 75,
+            "w": 12,
+            "h": 12
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "eg0dslgx3y0w0b"
+              },
+              "rawSql": "SELECT to_char(match_date, 'Dy DD Mon') AS \"Date\", stage AS \"Stage\", opponent AS \"Opponent\", batting_order AS \"Innings\",\n       score_for AS \"Our score\", score_against AS \"Their score\", result AS \"Result\", margin AS \"Margin\"\nFROM cricket.match_log WHERE team = 'Astros+' AND season = 'Summer 2026' ORDER BY match_date",
+              "format": "table",
+              "rawQuery": true,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "showHeader": true,
+            "cellHeight": "sm",
+            "footer": {
+              "show": false
+            }
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                }
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Result"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "type": "value",
+                        "options": {
+                          "Won": {
+                            "color": "#3fb950",
+                            "index": 0
+                          },
+                          "Lost": {
+                            "color": "#f85149",
+                            "index": 1
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "id": 22
+        },
+        {
+          "type": "table",
+          "title": "Spring 2026 results",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "gridPos": {
+            "x": 12,
+            "y": 66,
+            "w": 12,
+            "h": 10
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "eg0dslgx3y0w0b"
+              },
+              "rawSql": "SELECT to_char(match_date, 'DD Mon') AS \"Date\", stage AS \"Stage\", opponent AS \"Opponent\",\n       score_for AS \"Our score\", score_against AS \"Their score\", result AS \"Result\", margin AS \"Margin\"\nFROM cricket.match_log WHERE team = 'Astros+' AND season = 'Spring 2026' ORDER BY match_date",
+              "format": "table",
+              "rawQuery": true,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "showHeader": true,
+            "cellHeight": "sm",
+            "footer": {
+              "show": false
+            }
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                }
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Result"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "type": "value",
+                        "options": {
+                          "Won": {
+                            "color": "#3fb950",
+                            "index": 0
+                          },
+                          "Lost": {
+                            "color": "#f85149",
+                            "index": 1
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "id": 23
+        }
+      ],
+      "id": 21
+    },
+    {
+      "type": "row",
+      "title": "Detail \u00b7 batting collapse log",
+      "collapsed": true,
+      "gridPos": {
+        "x": 0,
+        "y": 66,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [
+        {
+          "type": "table",
+          "title": "Incident log: batting collapses",
+          "description": "3 or more wickets inside any 3-over window, before the last 3 overs (overs 18-20 are treated as deliberate slogging). One row per innings: the worst window.",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "gridPos": {
+            "x": 0,
+            "y": 67,
+            "w": 24,
+            "h": 11
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "grafana-postgresql-datasource",
+                "uid": "eg0dslgx3y0w0b"
+              },
+              "rawSql": "SELECT to_char(match_date, 'DD Mon') AS \"Date\", season AS \"Season\", opponent AS \"Opponent\",\n       overs AS \"Overs\", wickets_in_window AS \"Wickets\", score_change AS \"Score change\",\n       final_score AS \"Final score\", result AS \"Result\"\nFROM cricket.collapses WHERE team = 'Astros+' ORDER BY match_date DESC",
+              "format": "table",
+              "rawQuery": true,
+              "editorMode": "code"
+            }
+          ],
+          "options": {
+            "showHeader": true,
+            "cellHeight": "sm",
+            "footer": {
+              "show": false
+            }
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                }
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Result"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "type": "value",
+                        "options": {
+                          "Won": {
+                            "color": "#3fb950",
+                            "index": 0
+                          },
+                          "Lost": {
+                            "color": "#f85149",
+                            "index": 1
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Wickets"
+                },
+                "properties": [
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 75
+                  }
+                ]
+              }
+            ]
+          },
+          "id": 25
+        }
+      ],
+      "id": 24
+    },
+    {
+      "type": "row",
+      "title": "Detail \u00b7 full rank table, Summer 2026 vs the semi-finalists",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 67,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 26
+    },
+    {
+      "type": "table",
+      "title": "Where Astros+ ranks (out of 16) vs the semi-finalists",
+      "description": "Rank 1 = best in Div A for that metric. Green = top 5, red = bottom 5.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 68,
+        "w": 24,
+        "h": 17
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT r.category AS \"Area\", r.metric AS \"Metric\", r.value AS \"Astros+\", r.rank AS \"Rank\",\n       r.top4_avg AS \"Semi-finalists avg\",\n       r.league_avg AS \"League avg\", r.best_team || ' (' || r.best_value || ')' AS \"Best in Div A\"\nFROM cricket.team_ranks r\nWHERE r.team = 'Astros+' AND r.season = 'Summer 2026'\nORDER BY r.sort_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rank"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 70
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3fb950",
+                      "value": null
+                    },
+                    {
+                      "color": "#d29922",
+                      "value": 6
+                    },
+                    {
+                      "color": "#f85149",
+                      "value": 12
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Area"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metric"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Astros+"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              }
+            ]
+          }
+        ]
+      },
+      "id": 27
+    },
+    {
+      "type": "row",
+      "title": "Detail \u00b7 rank changes, Spring vs Summer",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 85,
+        "w": 24,
+        "h": 1
+      },
+      "panels": [],
+      "id": 28
+    },
+    {
+      "type": "table",
+      "title": "Astros+ rank by metric: Spring 2026 vs Summer 2026",
+      "description": "Rank out of the division in each season (1 = best). 'Places moved' is positive when the rank improved.",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "eg0dslgx3y0w0b"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 86,
+        "w": 24,
+        "h": 18
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "eg0dslgx3y0w0b"
+          },
+          "rawSql": "SELECT o.category AS \"Area\", o.metric AS \"Metric\",\n       o.value AS \"Spring\", o.rank AS \"Spring rank\",\n       n.value AS \"Summer\", n.rank AS \"Summer rank\",\n       o.rank - n.rank AS \"Places moved\",\n       n.top4_avg AS \"Top 4 avg, Summer\"\nFROM cricket.team_ranks o JOIN cricket.team_ranks n USING (team, metric)\nWHERE team = 'Astros+' AND o.season = 'Spring 2026' AND n.season = 'Summer 2026'\nORDER BY o.sort_order",
+          "format": "table",
+          "rawQuery": true,
+          "editorMode": "code"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": false
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spring rank"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.width",
+                "value": 95
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3fb950",
+                      "value": null
+                    },
+                    {
+                      "color": "#d29922",
+                      "value": 6
+                    },
+                    {
+                      "color": "#f85149",
+                      "value": 12
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Summer rank"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "basic"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.width",
+                "value": 95
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3fb950",
+                      "value": null
+                    },
+                    {
+                      "color": "#d29922",
+                      "value": 6
+                    },
+                    {
+                      "color": "#f85149",
+                      "value": 12
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Places moved"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#f85149",
+                      "value": null
+                    },
+                    {
+                      "color": "#8b949e",
+                      "value": 0
+                    },
+                    {
+                      "color": "#3fb950",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Area"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 75
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metric"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          }
+        ]
+      },
+      "id": 29
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Raw scorecards contain player names; the public repo is team-level only.
+data/*.json
+# Secrets (database connection strings)
+.env
+*.env
+__pycache__/
+.DS_Store
+.venv/
